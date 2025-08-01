@@ -26,11 +26,11 @@ app.UseEndpoints(endpoints =>
     });
 
     //Eg: products/details/1
-    endpoints.Map("products/details/{id:int?}", async context => // ? = optional value / :int => int is a constraint
+    endpoints.Map("products/details/{id:decimal?}", async context => // ? = optional value / :int => int is a constraint
     {
         if (context.Request.RouteValues.ContainsKey("id"))
         {
-            int id = Convert.ToInt32(context.Request.RouteValues["id"]);
+            decimal id = Convert.ToDecimal(context.Request.RouteValues["id"]);
             await context.Response.WriteAsync($"Product details - {id}");
         }
         else
