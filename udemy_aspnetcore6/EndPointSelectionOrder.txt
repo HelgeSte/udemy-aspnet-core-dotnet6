@@ -3,9 +3,13 @@ Top is highest precedence (will be evaluated first)
 1. URL template with more segments.
     Ex: "a/b/c/d" is higher than "a/b/c"
 2. URL template with literal text has more precedence than a parameter segment. 
-    Ex: "a/b" is higher than "a/{parameter}"
+    Ex: "a/b" is higher than "a/{parameter}" (first the a/c endpoint is checked
+    against a/b, but obviously that one fails. Then the a/{parameter} endpoint
+    (which has a lower precendce) is checked.
+    checks if a/{parameter} is a match 
 3. URL template that has a parameter segment with constraints has more precedence
     a parameter segment without constraints.
     Ex: "a/b:int" is higher than "a/b".
+    a/10 is used on a/b:int, but a/ten will be used by a/b
 4. Catch-all parameters (**)
     Ex: "a/b" is higher than "a/**".
