@@ -19,14 +19,16 @@ app.UseEndpoints(endpoints =>
         await context.Response.WriteAsync($"In files - {filename} - {extension}");
     });
 
-    endpoints.Map("employee/PROFILE/{employeename=helge}", async context =>
+    // endpoints.Map("employee/PROFILE/{employeename:minlength(4):maxlength(7)=helge}", async context =>
+    endpoints.Map("employee/PROFILE/{employeename:length(4,7)=helge}", async context =>
     {
-        string? employeename = Convert.ToString(context.Request.RouteValues["EMPLOYEEname"]); // case insensitive
+        string? employeename = Convert.ToString(context.Request.RouteValues["employeename"]); // case insensitive
         await context.Response.WriteAsync($"In employees - {employeename}");
     });
 
     //Eg: products/details/1
-    endpoints.Map("products/details/{id:decimal?}", async context => // ? = optional value / :int => int is a constraint
+    //endpoints.Map("products/details/{id:int:min(1):max(1000)?}", async context => // ? = optional value / :int => int is a constraint
+    endpoints.Map("products/details/{id:int:range(1,1000)?}", async context => 
     {
         if (context.Request.RouteValues.ContainsKey("id"))
         {
