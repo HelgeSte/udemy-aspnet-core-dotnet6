@@ -76,10 +76,19 @@ app.UseEndpoints(endpoints =>
             await context.Response.WriteAsync($"This is an awful month and is not allowed");
         }
     });
-    {
-        
-    }
     
+    // sales-report/2024/jan
+   
+    endpoints.Map("sales-report/2024/jan", async context =>
+    {
+        await context.Response.WriteAsync("Sales report exclusively for 2024 - jan");
+    });
+    
+    /* // why doesn't this work?
+     * endpoints.Map("sales-report/1814/**", async context =>
+    {
+        await context.Response.WriteAsync("Sales report with wildcard");
+    });*/
 });
 
 app.Run(async context =>
