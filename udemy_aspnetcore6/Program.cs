@@ -3,15 +3,12 @@ var app = builder.Build();
 // cannot use GetEndpoints here
 app.UseRouting(); // just enabled routing
 
-// Executes the appropriate endpoint based on teh endpoint selected 
-// by the above UseRouting() method
+// Executes the appropriate endpoint based on teh endpoint selected by the above UseRouting() method
 app.UseEndpoints(endpoints =>
 {
     /* Create your end points here
     // Can use endpoints.MapGet, MapControllers, MapPost, etc
-    //endspoints.Map(...);
-    //endspoints.MapGet(...);
-    //endspoints.MapPost(...);*/
+    //endspoints.Map(...);, endspoints.MapGet(...);,endspoints.MapPost(...); etc.*/
     endpoints.Map("files/{filename}.{extension}", async context =>
     {
         string? filename = Convert.ToString(context.Request.RouteValues["filename"]);
@@ -40,7 +37,7 @@ app.UseEndpoints(endpoints =>
             await context.Response.WriteAsync($"Products details - id is not supplied");
         }
     });
-
+    
     // Eg: daily-digest-report/{reportdate}
     endpoints.Map("daily-digest-report/{reportdate:datetime}",
         async context => {
@@ -83,12 +80,6 @@ app.UseEndpoints(endpoints =>
     {
         await context.Response.WriteAsync("Sales report exclusively for 2024 - jan");
     });
-    
-    /* // why doesn't this work?
-     * endpoints.Map("sales-report/1814/**", async context =>
-    {
-        await context.Response.WriteAsync("Sales report with wildcard");
-    });*/
 });
 
 app.Run(async context =>
