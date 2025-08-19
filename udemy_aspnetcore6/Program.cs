@@ -1,4 +1,4 @@
-var builder = WebApplication.CreateBuilder(args);
+    var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 // cannot use GetEndpoints here
 app.UseRouting(); // just enabled routing
